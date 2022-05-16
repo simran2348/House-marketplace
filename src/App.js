@@ -8,6 +8,7 @@ import Offers from './Pages/Offers'
 import Profile from './Pages/Profile'
 import SignIn from './Pages/SignIn'
 import SignUp from './Pages/SignUp'
+import PrivateRoute from './Components/PrivateRoute'
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
           <Route exact path={'/'} element={<Explore />} />
           <Route exact path={'/forgotpassword'} element={<ForgotPassword />} />
           <Route exact path={'/offers'} element={<Offers />} />
-          <Route exact path={'/profile'} element={<Profile />} />
+          <Route exact path={'/profile'} element={<PrivateRoute />}>
+            <Route exact path={'/profile'} element={<Profile />} />
+          </Route>
           <Route exact path={'/sign-in'} element={<SignIn />} />
           <Route exact path={'/sign-up'} element={<SignUp />} />
         </Routes>

@@ -10,6 +10,7 @@ import {
 import { db } from '../Firebase.config'
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
 import { toast } from 'react-toastify'
+import GoogleOAuth from '../Components/GoogleOAuth'
 
 function SignUp() {
   const navigate = useNavigate()
@@ -109,6 +110,7 @@ function SignUp() {
               </button>
             </div>
           </form>
+          <GoogleOAuth />
           <Link to={'/sign-in'} className='registerLink'>
             Sign In Instead...
           </Link>
