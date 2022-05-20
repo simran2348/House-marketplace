@@ -9,6 +9,7 @@ import Profile from './Pages/Profile'
 import SignIn from './Pages/SignIn'
 import SignUp from './Pages/SignUp'
 import PrivateRoute from './Components/PrivateRoute'
+import Category from './Pages/Category'
 
 function App() {
   return (
@@ -23,6 +24,11 @@ function App() {
           </Route>
           <Route exact path={'/sign-in'} element={<SignIn />} />
           <Route exact path={'/sign-up'} element={<SignUp />} />
+          <Route
+            exact
+            path={'/category/:categoryName'}
+            element={<Category />}
+          />
         </Routes>
         <Navbar />
       </Router>
