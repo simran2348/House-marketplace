@@ -10,6 +10,7 @@ import SignIn from './Pages/SignIn'
 import SignUp from './Pages/SignUp'
 import PrivateRoute from './Components/PrivateRoute'
 import Category from './Pages/Category'
+import CreateListings from './Pages/CreateListings'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             path={'/category/:categoryName'}
             element={<Category />}
           />
+          <Route exact path={'/create-listing'} element={<CreateListings />} />
         </Routes>
         <Navbar />
       </Router>

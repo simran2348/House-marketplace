@@ -461,6 +461,7 @@ button {
   display: flex;
   justify-content: space-between;
   max-width: 275px;
+  align-items: center;
 }
 
 .categoryListingInfoText {

@@ -6,9 +6,9 @@ import sellCategoryImage from '../Assets/jpg/sellCategoryImage.jpg'
 function Explore() {
   return (
     <div className='explore'>
-      <headre>
+      <header>
         <p className='pageHeader'>Explore</p>
-      </headre>
+      </header>
       <main>
         {
           // slider
