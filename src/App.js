@@ -11,6 +11,8 @@ import SignUp from './Pages/SignUp'
 import PrivateRoute from './Components/PrivateRoute'
 import Category from './Pages/Category'
 import CreateListings from './Pages/CreateListings'
+import Listing from './Pages/Listing'
+import Contact from './Pages/Contact'
 
 function App() {
   return (
@@ -25,12 +27,18 @@ function App() {
           </Route>
           <Route exact path={'/sign-in'} element={<SignIn />} />
           <Route exact path={'/sign-up'} element={<SignUp />} />
+          <Route exact path={'/contact/:landlordId'} element={<Contact />} />
           <Route
             exact
             path={'/category/:categoryName'}
             element={<Category />}
           />
           <Route exact path={'/create-listing'} element={<CreateListings />} />
+          <Route
+            exact
+            path={'/category/:categoryName/:listingId'}
+            element={<Listing />}
+          />
         </Routes>
         <Navbar />
       </Router>
