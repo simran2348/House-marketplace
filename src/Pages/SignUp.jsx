@@ -7,7 +7,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile
 } from 'firebase/auth'
-import { db } from '../Firebase.config'
+import { db } from '../firebase.config'
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 import GoogleOAuth from '../Components/GoogleOAuth'

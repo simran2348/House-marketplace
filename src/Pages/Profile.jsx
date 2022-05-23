@@ -11,7 +11,7 @@ import {
   orderBy,
   deleteDoc
 } from 'firebase/firestore'
-import { db } from '../Firebase.config'
+import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
 import arrowRight from '../Assets/svg/keyboardArrowRightIcon.svg'
 import homeIcon from '../Assets/svg/homeIcon.svg'
