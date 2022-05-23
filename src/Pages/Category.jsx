@@ -6,7 +6,8 @@ import {
   query,
   where,
   orderBy,
-  limit
+  limit,
+  startAfter
 } from 'firebase/firestore'
 import { db } from '../Firebase.config'
 import { toast } from 'react-toastify'
@@ -17,6 +18,7 @@ function Category() {
   const params = useParams()
   const [listings, setListings] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [last, setLast] = useState(null)
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -31,6 +33,10 @@ function Category() {
         )
 
         const querySnap = await getDocs(q)
+
+        const lastvisible = querySnap.docs[querySnap.docs.length - 1]
+
+        setLast(lastvisible)
 
         const listings = []
 
@@ -51,6 +57,40 @@ function Category() {
     fetchListings()
   }, [params.categoryName])
 
+  const fetchMoreListings = async () => {
+    try {
+      const listingsRef = collection(db, 'listings')
+
+      const q = query(
+        listingsRef,
+        where('type', '==', params.categoryName),
+        orderBy('timestamp', 'desc'),
+        startAfter(last),
+        limit(10)
+      )
+
+      const querySnap = await getDocs(q)
+
+      const lastvisible = querySnap.docs[querySnap.docs.length - 1]
+
+      setLast(lastvisible)
+
+      const listings = []
+
+      querySnap.forEach((doc) => {
+        return listings.push({
+          id: doc.id,
+          data: doc.data()
+        })
+      })
+
+      setListings((prev) => [...prev, ...listings])
+      setLoading(false)
+    } catch (error) {
+      toast.error('Could not fetch listings')
+    }
+  }
+
   return (
     <div className='category'>
       <header>
@@ -63,17 +103,26 @@ function Category() {
       {loading ? (
         <Spinner />
       ) : listings && listings.length > 0 ? (
-        <main>
-          <ul className='categoryListings'>
-            {listings.map((listing) => (
-              <ListingItem
-                key={listing.id}
-                listing={listing.data}
-                id={listing.id}
-              />
-            ))}
-          </ul>
-        </main>
+        <>
+          <main>
+            <ul className='categoryListings'>
+              {listings.map((listing) => (
+                <ListingItem
+                  key={listing.id}
+                  listing={listing.data}
+                  id={listing.id}
+                />
+              ))}
+            </ul>
+          </main>
+          <br />
+          <br />
+          {last && (
+            <p className='loadMore' onClick={fetchMoreListings}>
+              Load More
+            </p>
+          )}
+        </>
       ) : (
         <p>No Listings from {params.categoryName}</p>
       )}
