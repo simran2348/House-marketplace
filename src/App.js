@@ -13,6 +13,7 @@ import Category from './Pages/Category'
 import CreateListings from './Pages/CreateListings'
 import Listing from './Pages/Listing'
 import Contact from './Pages/Contact'
+import EditListing from './Pages/EditListing'
 
 function App() {
   return (
@@ -34,6 +35,11 @@ function App() {
             element={<Category />}
           />
           <Route exact path={'/create-listing'} element={<CreateListings />} />
+          <Route
+            exact
+            path={'/edit-listing/:listingId'}
+            element={<EditListing />}
+          />
           <Route
             exact
             path={'/category/:categoryName/:listingId'}
